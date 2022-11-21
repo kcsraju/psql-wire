@@ -65,6 +65,7 @@ type Server struct {
 	TerminateConn   CloseFn
 	Version         string
 	closer          chan struct{}
+	custom          interface{}
 }
 
 // ListenAndServe opens a new Postgres server on the preconfigured address and

@@ -208,3 +208,10 @@ func ExtendTypes(fn func(*pgtype.ConnInfo)) OptionFn {
 		return nil
 	}
 }
+
+func SetCustom(customData interface{}) OptionFn {
+	return func(srv *Server) error {
+		srv.custom = customData
+		return nil
+	}
+}
