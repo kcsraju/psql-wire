@@ -12,6 +12,7 @@ const (
 	ctxTypeInfo ctxKey = iota
 	ctxClientMetadata
 	ctxServerMetadata
+	ctxCustomData
 )
 
 // setTypeInfo constructs a new Postgres type connection info for the given value

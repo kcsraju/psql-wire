@@ -209,9 +209,13 @@ func ExtendTypes(fn func(*pgtype.ConnInfo)) OptionFn {
 	}
 }
 
-func SetCustom(customData interface{}) OptionFn {
+func SetCustomData(customData any) OptionFn {
 	return func(srv *Server) error {
-		srv.custom = customData
+		srv.data = customData
 		return nil
 	}
+}
+
+func GetCustomData(ctx context.Context) any {
+	return ctx.Value(ctxCustomData)
 }

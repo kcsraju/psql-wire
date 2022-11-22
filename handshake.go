@@ -192,3 +192,7 @@ func (srv *Server) sslUnsupported(conn net.Conn, reader *buffer.Reader, version 
 
 	return conn, reader, version, nil
 }
+
+func (srv *Server) setCustomData(ctx context.Context, i any) context.Context {
+	return context.WithValue(ctx, ctxCustomData, i)
+}

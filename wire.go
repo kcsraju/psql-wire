@@ -65,7 +65,7 @@ type Server struct {
 	TerminateConn   CloseFn
 	Version         string
 	closer          chan struct{}
-	custom          interface{}
+	data            any
 }
 
 // ListenAndServe opens a new Postgres server on the preconfigured address and
@@ -153,6 +153,10 @@ func (srv *Server) serve(ctx context.Context, conn net.Conn) error {
 	ctx, err = srv.writeParameters(ctx, writer, srv.Parameters)
 	if err != nil {
 		return err
+	}
+
+	if srv.data != nil {
+		ctx = srv.setCustomData(ctx, srv.data)
 	}
 
 	return srv.consumeCommands(ctx, conn, reader, writer)
